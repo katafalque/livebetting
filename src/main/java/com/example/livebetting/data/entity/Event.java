@@ -34,7 +34,7 @@ public class Event {
     @Column(name = "start_time")
     private OffsetDateTime startTime;
 
-    @OneToOne(mappedBy = "event")
+    @OneToOne(mappedBy = "event", cascade = CascadeType.PERSIST)
     private Market market;
 
     @OneToMany(mappedBy = "event")
