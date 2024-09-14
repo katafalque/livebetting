@@ -24,7 +24,7 @@ public class EventController {
 
     @PostMapping("/add")
     public ResponseEntity<String> addEvent(@RequestBody AddEventRequestModel addEventRequestModel) {
-        Event event = eventMapper.createEventWithBidirectionalRelationship(addEventRequestModel);
+        Event event = eventMapper.toEvent(addEventRequestModel);
         this.eventService.addEvent(event);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }

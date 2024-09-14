@@ -18,10 +18,4 @@ public class AddEventRequestModel {
     private String awayTeam;
     @JsonProperty("start_time")
     private OffsetDateTime startTime;
-    @JsonProperty("home_team_odd")
-    private double homeTeamOdd;
-    @JsonProperty("draw_odd")
-    private double drawOdd;
-    @JsonProperty("away_team_odd")
-    private double awayTeamOdd;
 }
