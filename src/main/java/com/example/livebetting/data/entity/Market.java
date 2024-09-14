@@ -21,13 +21,13 @@ public class Market {
     private UUID id;
 
     @Column(name = "home_team")
-    private float homeTeam;
+    private double homeTeam;
 
     @Column(name = "away_team")
-    private float awayTeam;
+    private double awayTeam;
 
     @Column(name = "draw")
-    private float draw;
+    private double draw;
 
     @Column(name = "created_at")
     private OffsetDateTime createdAt;

@@ -43,9 +43,9 @@ class EventServiceTest {
         var awayTeam = faker.esports().team();
         var league = faker.esports().league();
         var startTime = faker.date().future(2, TimeUnit.DAYS).toInstant().atOffset(ZoneOffset.UTC);
-        var awayTeamOdd = (float) faker.random().nextDouble();
-        var homeTeamOdd = (float) faker.random().nextDouble();
-        var drawOdd = (float) faker.random().nextDouble();
+        var awayTeamOdd = faker.random().nextDouble();
+        var homeTeamOdd = faker.random().nextDouble();
+        var drawOdd = faker.random().nextDouble();
 
         var market = Market.builder()
                 .awayTeam(awayTeamOdd)
