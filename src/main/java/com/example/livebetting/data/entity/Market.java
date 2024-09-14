@@ -1,10 +1,7 @@
 package com.example.livebetting.data.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -12,6 +9,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "market")
@@ -32,6 +31,6 @@ public class Market {
     @Column(name = "created_at")
     private OffsetDateTime createdAt;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Event event;
 }

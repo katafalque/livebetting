@@ -51,9 +51,6 @@ class EventControllerTest {
                 .homeTeam(faker.esports().team())
                 .awayTeam(faker.esports().team())
                 .startTime(OffsetDateTime.now())
-                .homeTeamOdd(faker.random().nextDouble())
-                .awayTeamOdd(faker.random().nextDouble())
-                .drawOdd(faker.random().nextDouble())
                 .build();
 
         var response = sendMockRequest(requestModel).andReturn().getResponse();

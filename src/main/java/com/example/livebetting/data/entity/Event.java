@@ -1,20 +1,19 @@
 package com.example.livebetting.data.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.OffsetDateTime;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Setter
 @ToString
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "event")
 public class Event {
@@ -34,12 +33,17 @@ public class Event {
     @Column(name = "start_time")
     private OffsetDateTime startTime;
 
-    @OneToOne(mappedBy = "event", cascade = CascadeType.PERSIST)
-    private Market market;
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Market> markets = new ArrayList<>();
 
     @OneToMany(mappedBy = "event")
-    private final Set<Ticket> tickets = new LinkedHashSet<>();
+    private List<Ticket> tickets = new ArrayList<>();
 
     @OneToOne(mappedBy = "event")
     private BulletinEvent bulletinEvent;
+
+    public void addMarket(Market market) {
+        markets.add(market);
+        market.setEvent(this);
+    }
 }

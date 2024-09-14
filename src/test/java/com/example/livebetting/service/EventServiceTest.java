@@ -15,11 +15,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.Date;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -66,15 +65,38 @@ class EventServiceTest {
                 .homeTeam(homeTeam)
                 .awayTeam(awayTeam)
                 .league(league)
-                .market(market)
                 .startTime(startTime)
                 .bulletinEvent(bulletinEvent)
                 .build();
+
+        event.addMarket(market);
 
         var eventService = new EventServiceImpl(eventRepository);
 
         /* Act */
         eventService.addEvent(event);
+
+        /* Assert */
+        verify(eventRepository, times(1)).save(event);
+    }
+
+    @Test
+    void should_add_markets_to_events() {
+        /* Arrange */
+        Event event = Event.builder().id(UUID.randomUUID()).markets(new ArrayList<>()).build();
+        Market market = Market.builder().id(UUID.randomUUID()).build();
+        event.addMarket(market);
+
+        Set<UUID> eventIds = new HashSet<>();
+        eventIds.add(event.getId());
+
+
+        when(eventRepository.findAllIds()).thenReturn(eventIds);
+        when(eventRepository.findById(event.getId())).thenReturn(Optional.of(event));
+
+        /* Act */
+        var eventService = new EventServiceImpl(eventRepository);
+        eventService.addMarketsToEvents();
 
         /* Assert */
         verify(eventRepository, times(1)).save(event);
