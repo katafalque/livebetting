@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -34,10 +34,10 @@ public class Event {
     private OffsetDateTime startTime;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Market> markets = new ArrayList<>();
+    private Set<Market> markets = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "event")
-    private List<Ticket> tickets = new ArrayList<>();
+    private Set<Ticket> tickets = new LinkedHashSet<>();
 
     @OneToOne(mappedBy = "event")
     private BulletinEvent bulletinEvent;
