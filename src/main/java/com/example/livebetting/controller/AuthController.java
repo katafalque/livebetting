@@ -3,6 +3,7 @@ package com.example.livebetting.controller;
 import com.example.livebetting.data.entity.User;
 import com.example.livebetting.data.model.request.LoginRequestModel;
 import com.example.livebetting.data.model.request.SignupRequestModel;
+import com.example.livebetting.data.model.response.LoginResponseModel;
 import com.example.livebetting.service.JwtService;
 import com.example.livebetting.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,10 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequestModel loginRequestModel) {
+    public ResponseEntity<LoginResponseModel> login(@RequestBody LoginRequestModel loginRequestModel) {
         User user = userService.login(loginRequestModel);
         String token = jwtService.generateToken(user);
-        return new ResponseEntity<>(token, HttpStatus.OK);
+        LoginResponseModel loginResponseModel = LoginResponseModel.builder().token("Bearer " + token).build();
+        return new ResponseEntity<>(loginResponseModel, HttpStatus.OK);
     }
 }
