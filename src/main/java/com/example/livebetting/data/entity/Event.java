@@ -39,9 +39,6 @@ public class Event {
     @OneToMany(mappedBy = "event")
     private Set<Ticket> tickets = new LinkedHashSet<>();
 
-    @OneToOne(mappedBy = "event")
-    private BulletinEvent bulletinEvent;
-
     public void addMarket(Market market) {
         markets.add(market);
         market.setEvent(this);
