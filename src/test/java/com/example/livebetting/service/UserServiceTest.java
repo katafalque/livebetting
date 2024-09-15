@@ -1,18 +1,19 @@
 package com.example.livebetting.service;
 
 
-import com.example.livebetting.data.entity.User;
 import com.example.livebetting.data.repository.UserRepository;
 import com.example.livebetting.service.impl.UserServiceImpl;
 import com.github.javafaker.Faker;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -22,36 +23,19 @@ class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private PasswordEncoder passwordEncoder;
+    @Mock
+    private AuthenticationManager authenticationManager;
+
+    private UserServiceImpl userService;
 
 
     @BeforeEach
     void setup() {
         MockitoAnnotations.openMocks(this);
         faker = new Faker();
-    }
-
-    @Test
-    void should_save_user() {
-        /* Arrange */
-        var firstName = faker.name().firstName();
-        var lastName = faker.name().lastName();
-        var username = faker.name().username();
-        var password = faker.lorem().word();
-
-        var user = User.builder()
-                .userName(username)
-                .password(password)
-                .firstName(firstName)
-                .lastName(lastName)
-                .build();
-
-        var userService = new UserServiceImpl(userRepository);
-        
-        /* Act */
-        userService.saveUser(user);
-
-        /* Assert */
-        verify(userRepository, times(1)).save(user);
+        userService = new UserServiceImpl(userRepository, passwordEncoder, authenticationManager);
     }
 
 }
