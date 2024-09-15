@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,4 +13,6 @@ import java.util.UUID;
 public interface EventRepository extends JpaRepository<Event, UUID> {
     @Query("SELECT e.id FROM Event e")
     Set<UUID> findAllIds();
+
+    Set<Event> findByStartTimeAfter(OffsetDateTime offsetDateTime);
 }

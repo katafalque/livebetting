@@ -3,14 +3,18 @@ package com.example.livebetting.mapper;
 import com.example.livebetting.data.entity.Event;
 import com.example.livebetting.data.model.request.AddEventRequestModel;
 import com.github.javafaker.Faker;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.OffsetDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(MockitoExtension.class)
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class EventMapperTest {
     private static Faker faker;
     private final EventMapper eventMapper = Mappers.getMapper(EventMapper.class);

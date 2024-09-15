@@ -3,7 +3,9 @@ package com.example.livebetting.service.impl;
 import com.example.livebetting.data.entity.Event;
 import com.example.livebetting.data.entity.Market;
 import com.example.livebetting.data.model.dto.GeneratedOddsDto;
+import com.example.livebetting.data.model.response.GetBulletinResponseModel;
 import com.example.livebetting.data.repository.EventRepository;
+import com.example.livebetting.mapper.BulletinMapper;
 import com.example.livebetting.service.EventService;
 import com.example.livebetting.utils.OddGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,12 @@ import java.util.UUID;
 @EnableScheduling
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
+    private final BulletinMapper bulletinMapper;
 
     @Autowired
-    public EventServiceImpl(EventRepository eventRepository) {
+    public EventServiceImpl(EventRepository eventRepository, BulletinMapper bulletinMapper) {
         this.eventRepository = eventRepository;
+        this.bulletinMapper = bulletinMapper;
     }
 
     @Override
@@ -53,5 +57,11 @@ public class EventServiceImpl implements EventService {
                 }
             }
         }
+    }
+
+    @Override
+    public GetBulletinResponseModel getBulletin() {
+        Set<Event> events = this.eventRepository.findByStartTimeAfter(OffsetDateTime.now());
+        return bulletinMapper.mapToGetBulletinResponseModel(events);
     }
 }
