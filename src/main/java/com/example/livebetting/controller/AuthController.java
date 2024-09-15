@@ -1,6 +1,9 @@
 package com.example.livebetting.controller;
 
+import com.example.livebetting.data.entity.User;
+import com.example.livebetting.data.model.request.LoginRequestModel;
 import com.example.livebetting.data.model.request.SignupRequestModel;
+import com.example.livebetting.service.JwtService;
 import com.example.livebetting.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,15 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthController {
     private final UserService userService;
+    private final JwtService jwtService;
 
     @Autowired
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, JwtService jwtService) {
         this.userService = userService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody SignupRequestModel signupRequestModel) {
         userService.register(signupRequestModel);
         return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequestModel loginRequestModel) {
+        User user = userService.login(loginRequestModel);
+        String token = jwtService.generateToken(user);
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 }
