@@ -1,11 +1,13 @@
 package com.example.livebetting.service.impl;
 
 import com.example.livebetting.data.entity.User;
+import com.example.livebetting.data.model.request.LoginRequestModel;
 import com.example.livebetting.data.model.request.SignupRequestModel;
 import com.example.livebetting.data.repository.UserRepository;
 import com.example.livebetting.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +35,18 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         this.userRepository.save(user);
+    }
+
+    @Override
+    public User login(LoginRequestModel loginRequestModel) {
+        this.authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequestModel.getUsername(),
+                        loginRequestModel.getPassword()
+                )
+        );
+
+        return this.userRepository.findByUserName(loginRequestModel.getUsername())
+                .orElseThrow();
     }
 }
