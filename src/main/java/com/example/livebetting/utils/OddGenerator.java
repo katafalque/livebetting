@@ -2,6 +2,7 @@ package com.example.livebetting.utils;
 
 import com.example.livebetting.data.model.dto.GeneratedOddsDto;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,9 +22,14 @@ public class OddGenerator {
         randomOdds.add(rng.nextDouble(1, 9));
         Collections.shuffle(randomOdds);
         return GeneratedOddsDto.builder()
-                .homeTeamOdd(randomOdds.get(0))
-                .drawOdd(randomOdds.get(1))
-                .awayTeamOdd(randomOdds.get(2))
+                .homeTeamOdd(round(randomOdds.get(0)))
+                .drawOdd(round(randomOdds.get(1)))
+                .awayTeamOdd(round(randomOdds.get(2)))
                 .build();
+    }
+
+    private static double round(double d) {
+        DecimalFormat twoDecimals = new DecimalFormat("#.##");
+        return Double.parseDouble(twoDecimals.format(d).replace(",", "."));
     }
 }

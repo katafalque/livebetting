@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class OddGeneratorTes {
+class OddGeneratorTest {
     @Test
     void should_generate_random_odds() {
         /* Act */
