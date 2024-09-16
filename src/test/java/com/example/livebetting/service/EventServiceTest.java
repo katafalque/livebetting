@@ -27,7 +27,6 @@ import static org.mockito.Mockito.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class EventServiceTest {
     private static Faker faker;
-
     @Mock
     private EventRepository eventRepository;
     @Mock
