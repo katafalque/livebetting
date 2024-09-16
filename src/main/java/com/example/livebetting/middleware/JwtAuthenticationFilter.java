@@ -21,7 +21,7 @@ import java.io.IOException;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final String USERNAME = "username";
+    private static final String USERNAME = "username";
     private final HandlerExceptionResolver handlerExceptionResolver;
 
     private final JwtService jwtService;
