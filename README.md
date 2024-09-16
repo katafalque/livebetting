@@ -1,6 +1,6 @@
 # Summary
 
-* This spring boot 3.3 project implemented with Java 17
+* This spring boot 3.3 project implemented with Java 17 and maven
 
 # How to use
 
@@ -33,7 +33,7 @@
 }
 ```
 
-- Response
+- Response - application will return a jwt token
 
 ```
   {
@@ -41,7 +41,7 @@
   }
 ```
 
-- Token in the response should be used as Authorization header in below requests
+- Token in the response should be used as Authorization header in the requests below.
 
 3. Add match to app POST (/api/event/add)
 
@@ -104,7 +104,7 @@
 
 - Response simply will be Ok if successful. Cannot place more than 500 coupons at a time.
 - Event id should be get from h2 db which can be accessed via [h2-console](http://localhost:8080/h2-console/)
-- Db username = dbc:h2:mem:testdb
+- Db username = jdbc:h2:mem:testdb
 - Db password = password
 
 6. See your bets GET (/api/bet)
