@@ -49,7 +49,7 @@ public class EventServiceImpl implements EventService {
                             .homeTeam(newOdds.getHomeTeamOdd())
                             .draw(newOdds.getDrawOdd())
                             .awayTeam(newOdds.getAwayTeamOdd())
-                            .createdAt(OffsetDateTime.now())
+                            .createdAt(OffsetDateTime.now().withNano(0))
                             .build();
 
                     event.addMarket(market);

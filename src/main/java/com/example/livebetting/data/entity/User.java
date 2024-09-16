@@ -32,8 +32,8 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private final Set<Coupon> coupons = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Coupon> coupons = new LinkedHashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -43,5 +43,10 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return userName;
+    }
+
+    public void addCoupon(Coupon coupon) {
+        coupons.add(coupon);
+        coupon.setUser(this);
     }
 }

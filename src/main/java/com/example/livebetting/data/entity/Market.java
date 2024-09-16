@@ -1,6 +1,5 @@
 package com.example.livebetting.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,7 +31,15 @@ public class Market {
     @Column(name = "created_at")
     private OffsetDateTime createdAt;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private Event event;
+
+    public double getOddByName(String selection) {
+        return switch (selection) {
+            case "home" -> homeTeam;
+            case "draw" -> draw;
+            case "away" -> awayTeam;
+            default -> 1;
+        };
+    }
 }
