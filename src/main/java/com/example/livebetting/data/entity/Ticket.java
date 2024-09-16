@@ -1,10 +1,7 @@
 package com.example.livebetting.data.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -13,6 +10,8 @@ import java.util.UUID;
 @Setter
 @ToString
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "ticket")
 public class Ticket {
@@ -24,20 +23,14 @@ public class Ticket {
     private String selection;
 
     @Column(name = "odd")
-    private float odd;
-
-    @Column(name = "amount")
-    private int amount;
-
-    @Column(name = "coupon_count")
-    private int couponCount;
+    private double odd;
 
     @Column(name = "created_at")
     private OffsetDateTime createdAt;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Coupon coupon;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Event event;
 }
