@@ -5,7 +5,7 @@
 # How to use
 
 * [Swagger ui](localhost:8080/swagger-ui/index.html)
-* Or postman file can be found in repo
+* Or postman file can be found in repo as livebetting.postman_collection
 
 # APIs
 

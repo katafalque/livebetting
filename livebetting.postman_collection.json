@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "8b6f5bbf-1a76-46ab-a8bd-6f19c6f1e5df",
+		"name": "livebetting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15963022"
+	},
+	"item": [
+		{
+			"name": "add event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXRhZmFsayIsImlhdCI6MTcyNjQ1NjA2MiwiZXhwIjoxNzI2NDU5NjYyfQ.l76jd-8lAT_MIEqDx0fL6f4tWaQHaBN3khVGWrxEd-c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"league\": \"\",\r\n    \"home_team\": \"\",\r\n    \"away_team\": \"\",\r\n    \"start_time\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/event/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get bulletin",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"\",\r\n    \"last_name\": \"\",\r\n    \"userName\": \"\",\r\n    \"password\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "place bet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXRhZmFsayIsImlhdCI6MTcyNjQ1NjA2MiwiZXhwIjoxNzI2NDU5NjYyfQ.l76jd-8lAT_MIEqDx0fL6f4tWaQHaBN3khVGWrxEd-c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bet_amount\": 1,\r\n    \"multi_coupon_count\": 1,\r\n    \"events\": [\r\n        {\r\n            \"event_id\": \"\",\r\n            \"selection\": \"\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/bet/place",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bet",
+						"place"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get bets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXRhZmFsayIsImlhdCI6MTcyNjQ0NDQzNiwiZXhwIjoxNzI2NDQ4MDM2fQ.eH12Kwl_Rc-qr12qmoKhaiTid4C15WDY-EwaLs003W8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bet_amount\": 1000,\r\n    \"multi_coupon_count\": 30,\r\n    \"events\": [\r\n        {\r\n            \"event_id\": \"3cecfd01-c68d-4023-bfed-be2df2a88d3b\",\r\n            \"selection\": \"home\"\r\n        },\r\n        {\r\n            \"event_id\": \"98b45da3-4276-4ce5-bcb0-30d4a33ec376\",\r\n            \"selection\": \"away\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/bet/place",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bet",
+						"place"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
